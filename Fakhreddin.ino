@@ -77,27 +77,27 @@ void loop() {
     sensor.readOutputRegs();
     distances[sensor.channelUsed] = sensor.distanceMillimeters;
       
-       if (distances[1]<25)
+       if (distances[1]<25) // Bilen backar om den är nära vägen 
        {
-        Speed = 100;
+        Speed = 130;
         digitalWrite(IN1, LOW);
         digitalWrite(IN2, HIGH);
          
        }
-      else if (distances[1]>25 && distances[1]<150)
+      else if (distances[1]>25 && distances[1]<150) // Bilen kör framåt men långsamt om den närmar sig väggen
        {
         Speed = 130;
         digitalWrite(IN1, HIGH);
         digitalWrite(IN2, LOW);
        }
-       else
+       else // Bilen kör framåt
        {
-        Speed = 150;
+        Speed = 175;
          digitalWrite(IN1, HIGH);
         digitalWrite(IN2, LOW);
        }
 
-  if (Speed == 100)
+  if (Speed == 100) //back svängning
   
   {
     if (distances[0]<100)
@@ -108,7 +108,7 @@ void loop() {
        myservo.write(135);
   }
 
-      else if (Speed > 100)
+      else if (Speed > 100) // Bilen kör framåt ochsvänger rätt
       {
    if (sensor.channelUsed == 2)
     {
@@ -119,7 +119,8 @@ void loop() {
        else if (distances[2]<400) myservo.write(60);
        
        else myservo.write(90);
-  
+       
+  // Skriver ut sensor data:
   
         Serial.print("\n");
         Serial.print("left sensor= ");
