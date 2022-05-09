@@ -1,8 +1,3 @@
-/*
-sketch belongs to this video: https://youtu.be/crw0Hcc67RY
-write by Moz for YouTube changel logMaker360
-4-12-2017
-*/
 #include "header.h"
 
 
