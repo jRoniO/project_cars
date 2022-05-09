@@ -24,8 +24,8 @@ int middlesensor = 1;
 int rightsensor = 2;
 
 // Namn för olika hasigheter för lättare ändring av hastigheten.
-int BackSpeed = 130;
-int LowSpeed = 120;
+int BackSpeed = 180;
+int LowSpeed = 150;
 int HighSpeed = 205;
 
 // Namn för olika sväng vinklar för lättare ändring av svängvinkel
@@ -34,9 +34,13 @@ int TurnLeft = 45; // Döper VänsterSvängnings vinkel
 int Straight = 90; // Döper rakt vinkel 
 
 // namn för avstånd mättning
-int Near = 15;
+int Near = 0;
 int NotSafe = 350;
 int Safe = 500;
+
+int NearTurn = 15;
+int NotSafeTurn = 500;
+int SafeTurn = 700;
 
 
 OPT3101 sensor;   // döper sensorn
