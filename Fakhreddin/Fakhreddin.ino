@@ -102,16 +102,19 @@ rightsensor = distances[2];
        {
           angle = map(leftsensor, Safe, Near,  Straight, TurnRight);
           myservo.write(angle); 
+          
        }
+        }
        else if (rightsensor<Safe)
        {
           angle = map(rightsensor, Safe, Near,  Straight, TurnLeft);
           myservo.write(angle); 
+         
        }       
        else myservo.write(Straight);
        
   // Skriver ut sensor data:
-  /*
+  
         Serial.print("\n");
         Serial.print("left sensor= ");
         Serial.print(leftsensor);
@@ -124,12 +127,12 @@ rightsensor = distances[2];
         Serial.print("Right Sensor= ");
         Serial.print(rightsensor);
        Serial.print("\n");
-   */
+   
       Serial.print("Speed= ");
         Serial.print(Speed);
        Serial.print("\n");
       Serial.println();
-    }
+  
     dataReady = false;
   }
   }
