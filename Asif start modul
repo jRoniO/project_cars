@@ -1,0 +1,47 @@
+#define remotePin 12
+#define RemoteStart 11
+
+#define ENABLE_PIN 5
+      
+int In1 = 7;     //motor A
+int In2 = 8;
+int SPEED = 255;
+
+//int remotePin = 12;
+int remoteVal = 0;
+ //analogWrite(PWM_A, 255); //sets speed, motor A
+//digitalWrite(In1, LOW);
+//digitalWrite(In2, HIGH);
+//analogWrite(ENA,SPEED);
+
+ void setup()
+ {
+   pinMode(RemoteStart, OUTPUT);
+   pinMode(remotePin, INPUT);
+   //set all pins as output;
+   pinMode(In1, OUTPUT); 
+   pinMode(In2, OUTPUT); 
+   pinMode(ENABLE_PIN, OUTPUT);
+
+   //analogWrite(ENA, 255); //sets speed, motor A
+   digitalWrite(In1, LOW);
+   digitalWrite(In2, HIGH);
+   //analogWrite(ENA,SPEED); 
+   //Serial.begin(9600);
+   return;
+}
+
+void loop()
+{
+   remoteVal = digitalRead(remotePin); // Läser av insignalen från startmodulen.
+   //Serial.print("Remote value: ");
+   //Serial.println(remoteVal);
+   
+   if (remoteVal) 
+      analogWrite(ENABLE_PIN, 255);
+   else
+      analogWrite(ENABLE_PIN, 0);
+   return; 
+ }
+
+             
