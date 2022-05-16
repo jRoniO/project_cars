@@ -3,16 +3,7 @@
 
 void setup() 
 {
-
-  
-  // Attach the Servo variable to a pin:
-    pinMode (IN1, OUTPUT);
-    pinMode (IN2, OUTPUT);
-    pinMode (ENA, OUTPUT);
- 
-
-
-   myservo.attach(servoPin);
+  myservo.attach(servoPin);
    myservo.write(90);
    Wire.begin();
    Serial.begin(9600);
@@ -48,73 +39,53 @@ middlesensor = distances[1];
 rightsensor = distances[2];
 
 
- //control speed 
-  analogWrite(ENA, Speed); 
   
  if (dataReady)
   {
     sensor.readOutputRegs();
     distances[sensor.channelUsed] = sensor.distanceMillimeters;
       
-       if (middlesensor<Near) // Bilen backar om den är nära vägen 
-       {
-        Speed = BackSpeed;
-        digitalWrite(IN1, LOW);
-        digitalWrite(IN2, HIGH);
-        
-         
-       }
-      else if (middlesensor>Near && middlesensor<NotSafe) // Bilen kör framåt men långsamt om den närmar sig väggen
-       {
-        Speed = map(middlesensor, Near, NotSafe, LowSpeed, HighSpeed);
-        digitalWrite(IN1, HIGH);
-        digitalWrite(IN2, LOW);
-       }
-       else // Bilen kör framåt
-       {
-        Speed = HighSpeed;
-         digitalWrite(IN1, HIGH);
-        digitalWrite(IN2, LOW);
-       }
-
+      
   
    if (sensor.channelUsed == 2)
     {
-      if (Speed == BackSpeed) //back svängning
-  
-  {
-    if (rightsensor<Near)
-       {
-          angle = map(rightsensor, NotSafe, Near, Straight, TurnLeft);
-          myservo.write(angle); 
-       }
-       else if (leftsensor<Near) 
-      {   
-          angle = map(leftsensor, NotSafe, Near,  Straight, TurnRight);
-          myservo.write(angle); 
-      }
-        
-  }
-
-      else if (Speed > BackSpeed) // Bilen kör framåt ochsvänger rätt
-      {
-       if (leftsensor<Safe)
+      if (leftsensor<Safe && rightsensor> leftsensor)
        {
           angle = map(leftsensor, Safe, Near,  Straight, TurnRight);
           myservo.write(angle); 
           
        }
-        }
-       else if (rightsensor<Safe)
+    
+      else if (rightsensor<Safe && rightsensor<leftsensor)
        {
           angle = map(rightsensor, Safe, Near,  Straight, TurnLeft);
           myservo.write(angle); 
          
-       }       
+       }      
+
+           else if (middlesensor<NotSafe && rightsensor<leftsensor)
+       {
+          angle = map(rightsensor, Safe, Near,  Straight, TurnRight);
+          myservo.write(angle); 
+         
+       }      
+
+           else if (middlesensor<NotSafe && rightsensor>leftsensor)
+       {
+          angle = map(rightsensor, Safe, Near,  Straight, TurnLeft);
+          myservo.write(angle); 
+         
+       }      
+        
        else myservo.write(Straight);
+
+
+    
        
-  // Skriver ut sensor data:
+  }
   
+  // Skriver ut sensor data:
+  /*
         Serial.print("\n");
         Serial.print("left sensor= ");
         Serial.print(leftsensor);
@@ -127,18 +98,16 @@ rightsensor = distances[2];
         Serial.print("Right Sensor= ");
         Serial.print(rightsensor);
        Serial.print("\n");
-   
-      Serial.print("Speed= ");
-        Serial.print(Speed);
+   Serial.print("Angle= ");
+        Serial.print(angle);
        Serial.print("\n");
-      Serial.println();
-  
+       Serial.println();
+  */
     dataReady = false;
+  
   }
-  }
- 
-
- 
- 
-
 }
+ 
+
+ 
+ 
