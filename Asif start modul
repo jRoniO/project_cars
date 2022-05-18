@@ -38,9 +38,9 @@ void loop()
    //Serial.println(remoteVal);
    
    if (remoteVal) 
-      analogWrite(ENABLE_PIN, 255);
+      analogWrite(ENABLE_PIN, 255); // Motor körs i högt hastighet.
    else
-      analogWrite(ENABLE_PIN, 0);
+      analogWrite(ENABLE_PIN, 0); // anras är motorn av.
    return; 
  }
 
