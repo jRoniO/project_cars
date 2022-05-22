@@ -1,14 +1,13 @@
 // Include the servo library:
-#include <Servo.h>
-#include <OPT3101.h>
+#include <Servo.h> // inkluderar bilblotek för servo
+#include <OPT3101.h> // inkluderar bilblotek för sensor
 #include <Wire.h>
 
 
-// Create a new servo object:
-Servo myservo;
 
-// Define the servo pin:
-#define servoPin 5
+Servo myservo; // Create a new servo object:
+
+#define servoPin 5 // definerar servos pin
 
 const uint8_t dataReadyPin = 2; // Pin nummer för sensor läsning
 
@@ -21,9 +20,9 @@ int rightsensor = 2;
 
 // Namn för olika sväng vinklar för lättare ändring av svängvinkel
 int Straight = 80; // Döper rakt vinkel 
-int TurnAngle = 40;
-int TurnRight = Straight - TurnAngle; // Döper HögerSvängnings vinkel
-int TurnLeft = Straight + TurnAngle; // Döper VänsterSvängnings vinkel 
+int TurnAngle = 40; // Det här är hur mycket servon kan svänga för varje riktning.
+int TurnRight = Straight - TurnAngle; // Rakt - svängvinkel gör att bilen svänger till höger om TurnRight anropas.
+int TurnLeft = Straight + TurnAngle; // Rakt + svängvinkel gör att bilen höger till höger om TurnLeft anropas.
 
 // namn för avstånd mättning
 int Near = 200;
