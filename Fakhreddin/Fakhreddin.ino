@@ -3,23 +3,22 @@
 
 void setup() 
 {
-  myservo.attach(servoPin);
-   myservo.write(90);
+  myservo.attach(servoPin); //sätter igång sensor
+   myservo.write(90); // sätter sensor till 90
    Wire.begin();
-   Serial.begin(9600);
-  
-  // Wait for the serial port to be opened before printing
-  // messages (only applies to boards with native USB).
+   Serial.begin(9600); // sätter igång serial överföring.
+
   
   while (!Serial) {}
 
   sensor.init();
-  if (sensor.getLastError())
+  if (sensor.getLastError()) // om något fel med sensor skriv Failed to initialize OPT3101: error
   {
     Serial.print(F("Failed to initialize OPT3101: error "));
     Serial.println(sensor.getLastError());
     while (1) {}
   }
+  // aktiverar sensors olika funktioner genom sensors biblotek.
   sensor.setContinuousMode();
   sensor.enableDataReadyOutput(1);
   sensor.setFrameTiming(32);
@@ -40,7 +39,7 @@ rightsensor = distances[2];
 
 
   
- if (dataReady)
+ if (dataReady) // om sensor är på gång
   {
     sensor.readOutputRegs();
     distances[sensor.channelUsed] = sensor.distanceMillimeters;
@@ -49,35 +48,35 @@ rightsensor = distances[2];
   
    if (sensor.channelUsed == 2)
     {
-      if (leftsensor<Safe && rightsensor> leftsensor)
+      if (leftsensor<Safe && rightsensor> leftsensor) // if för höger sväng
        {
-          angle = map(leftsensor, Safe, Near,  Straight, TurnRight);
+          angle = map(leftsensor, Safe, Near,  Straight, TurnRight); // map funktion för smidigare sväng
           myservo.write(angle); 
           
        }
     
-      else if (rightsensor<Safe && rightsensor<leftsensor)
+      else if (rightsensor<Safe && rightsensor<leftsensor)  // if för vänster sväng
        {
-          angle = map(rightsensor, Safe, Near,  Straight, TurnLeft);
+          angle = map(rightsensor, Safe, Near,  Straight, TurnLeft);// map funktion för smidigare sväng
           myservo.write(angle); 
          
        }      
 
-           else if (middlesensor<NotSafe && rightsensor<leftsensor)
+           else if (middlesensor<NotSafe && rightsensor<leftsensor)  // if för höger sväng men om väggen framför närmar sig
        {
-          angle = map(rightsensor, Safe, Near,  Straight, TurnRight);
+          angle = map(rightsensor, Safe, Near,  Straight, TurnRight);// map funktion för smidigare sväng
           myservo.write(angle); 
          
        }      
 
-           else if (middlesensor<NotSafe && rightsensor>leftsensor)
+           else if (middlesensor<NotSafe && rightsensor>leftsensor) // if för vänster sväng men om väggen framför närmar sig
        {
-          angle = map(rightsensor, Safe, Near,  Straight, TurnLeft);
+          angle = map(rightsensor, Safe, Near,  Straight, TurnLeft);// map funktion för smidigare sväng
           myservo.write(angle); 
          
        }      
         
-       else myservo.write(Straight);
+       else myservo.write(Straight); // bilen kör framåt
 
 
     
