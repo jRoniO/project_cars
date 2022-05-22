@@ -33,9 +33,9 @@ void setup()
 void loop() {
 
 // Döper om sensorer
-leftsensor = distances[0]; 
-middlesensor = distances[1];
-rightsensor = distances[2];
+leftsensor = distances[0];  // Döper om vänster sensor från distances[0] till leftsensor
+middlesensor = distances[1];  // Döper om vänster sensor från distances[1] till middlesensor
+rightsensor = distances[2];  // Döper om vänster sensor från distances[2] till rightsensor
 
 
   
